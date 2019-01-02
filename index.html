@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
     <!-- Custom stuff -->
     <link href="style.css" rel="stylesheet">
@@ -39,7 +40,7 @@
                     <span class="sign-in">Sign In</span>
                 </div>
                 <div class="col-md-1 offset-md-5">
-                    <a href="#" class="">My Cart(0)</a>
+                    <a href="#" class="">My Cart({{ cart.length }})</a>
                 </div>
                 <div class="col-md-1">
                     <a href="#" class="checkout">Checkout</a>
@@ -83,12 +84,12 @@
     </div>
 
     <main class="main">
-        <div class="container">
-            <img class="float-left preview-lg" src="img/product1.jpg">
-            <h1>of logo striped tee</h1>
-            <h2 class="description"><b>red/white striped tee</b></h2>
-            <span class="price"><b>US$30.00</b></span>
-            <form action="">
+        <div v-if="items && items.length" class="container">
+            <img :src="items[0].photo" class="float-left preview-lg">
+            <h1>{{ items[0].name }}</h1>
+            <h2 class="description"><b>{{ items[0].description }}</b></h2>
+            <span class="price"><b>US${{ items[0].price }}.00</b></span>
+            <form @submit.prevent="onSubmit(items[0])">
                 <div class="row pb-4 d-flex align-items-center">
                     <div class="col-md-3 pl-0">
                         Size:
@@ -112,17 +113,16 @@
                 </div>
                 <div class="row">
                     <div class="">
-                        <input type="submit" value="Add To Cart">
+                        <input @click type="submit" value="Add To Cart">
                     </div>
                 </div>
             </form>
             <div class="clearfix"></div>
             <span class="recommended">Recommended Products</span>
             <div class="row catalog-products mt-4">
-                <div class="col-md-3"><a href="#"><img src="img/product2.jpg"></a></div>
-                <div class="col-md-3"><a href="#"><img src="img/product3.jpg"></a></div>
-                <div class="col-md-3"><a href="#"><img src="img/product4.jpg"></a></div>
-                <div class="col-md-3"><a href="#"><img src="img/product5.jpg"></a></div>
+                <div v-for="item in items.slice(1)" class="col-md-3">
+                    <a href="#"><img :src="item.photo"></a>
+                </div>
             </div>
         </div>
     </main>
@@ -175,3 +175,31 @@
 </div>
 </body>
 </html>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: [],
+                cart: []
+            };
+        },
+        methods: {
+            onSubmit(item) {
+                this.cart.push({
+                    name: item.name,
+                    description: item.description,
+                    photo: item.photo
+                });
+            }
+        },
+        mounted() {
+            axios
+                .get('https://api.myjson.com/bins/10hkrw')
+                .then(response => (this.items = response.data.items));
+        },
+    });
+
+</script>
