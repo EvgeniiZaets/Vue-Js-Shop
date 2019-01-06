@@ -22,110 +22,20 @@
 <body>
 <div id="app">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse row" id="navbarSupportedContent">
-                <div class="col-md-3 search">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="pl-4" type="text" placeholder="Search" aria-label="Search">
-                        <input type="submit" value="Go">
-                    </form>
-                </div>
-                <div class="col-md-2">
-                    <span>New Customer</span>
-                    <span class="sign-in">Sign In</span>
-                </div>
-                <div class="col-md-1 offset-md-5">
-                    <a href="#" class="">My Cart({{ cart.length }})</a>
-                </div>
-                <div class="col-md-1">
-                    <a href="#" class="checkout">Checkout</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <header class="header">
-        <div class="container">
-            <div class="jumbotron text-center">
-                <img src="img/logo.png">
-            </div>
-        </div>
-    </header>
-
-    <div class="container-fluid">
-        <ul class="nav justify-content-center menu">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Featured items</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Apparel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Accessories</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Special collections</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">All products</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="container">
-        <div class="breadcrumbs">
-            <a href="#">Odd Future</a> > ODF80057
-        </div>
-    </div>
+    <App-header :cart="cart"></App-header>
+    <App-breadcrumbs></App-breadcrumbs>
 
     <main class="main">
         <div v-if="items && items.length" class="container">
-            <img :src="items[0].photo" class="float-left preview-lg">
-            <h1>{{ items[0].name }}</h1>
-            <h2 class="description"><b>{{ items[0].description }}</b></h2>
-            <span class="price"><b>US${{ items[0].price }}.00</b></span>
-            <form @submit.prevent="onSubmit(items[0])">
-                <div class="row pb-4 d-flex align-items-center">
-                    <div class="col-md-3 pl-0">
-                        Size:
-                    </div>
-                    <div class="col-md-2">
-                        <select>
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row pb-4 d-flex align-items-center">
-                    <div class="col-md-3 pl-0">
-                        Quantity:
-                    </div>
-                    <div class="col-md-2">
-                        <input type="text" name="quantity" value="1">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="">
-                        <input @click type="submit" value="Add To Cart">
-                    </div>
-                </div>
-            </form>
-            <div class="clearfix"></div>
+            <Item-card :items="items" @addtocart="addToCart(items[0])"></Item-card>
             <span class="recommended">Recommended Products</span>
             <div class="row catalog-products mt-4">
-                <recommended-product v-for="item in items.slice(1)" :photo="item.photo"></recommended-product>
+                <Recommended-product v-for="item in items.slice(1)" :photo="item.photo" :key="item.id"></Recommended-product>
             </div>
         </div>
     </main>
 
-    <app-footer></app-footer>
+    <App-footer></App-footer>
 
 </div>
 </body>
@@ -133,7 +43,128 @@
 
 <script>
 
-    Vue.component('recommendedProduct', {
+    Vue.component('AppHeader', {
+        props: ['cart'],
+        template: `
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+                            <div class="col-md-3 search">
+                                <form class="form-inline my-2 my-lg-0">
+                                    <input class="pl-4" type="text" placeholder="Search" aria-label="Search">
+                                    <input type="submit" value="Go">
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <span>New Customer</span>
+                                <span class="sign-in">Sign In</span>
+                            </div>
+                            <div class="col-md-1 offset-md-5">
+                                <a href="#" class="">My Cart({{ cart.length }})</a>
+                            </div>
+                            <div class="col-md-1">
+                                <a href="#" class="checkout">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <header class="header">
+                    <div class="container">
+                        <div class="jumbotron text-center">
+                            <img src="img/logo.png">
+                        </div>
+                    </div>
+                </header>
+
+                <div class="container-fluid">
+                    <ul class="nav justify-content-center menu">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Featured items</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Apparel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Accessories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Special collections</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">All products</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        `
+    });
+
+    Vue.component('AppBreadcrumbs', {
+        props: ['cart'],
+        template: `
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="#">Odd Future</a> > ODF80057
+                </div>
+            </div>
+        `
+    });
+
+    Vue.component('ItemCard', {
+        props: ['items'],
+        template: `
+            <div>
+                <img :src="items[0].photo" class="float-left preview-lg">
+                <h1>{{ items[0].name }}</h1>
+                <h2 class="description"><b>{{ items[0].description }}</b></h2>
+                <span class="price"><b>US{{ items[0].price }}.00</b></span>
+                <form @submit.prevent="onSubmit">
+                    <div class="row pb-4 d-flex align-items-center">
+                        <div class="col-md-3 pl-0">
+                            Size:
+                        </div>
+                        <div class="col-md-2">
+                            <select>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row pb-4 d-flex align-items-center">
+                        <div class="col-md-3 pl-0">
+                            Quantity:
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="quantity" value="1">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="">
+                            <input type="submit" value="Add To Cart">
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        `,
+        methods: {
+            onSubmit() {
+                this.$emit('addtocart')
+            }
+        }
+    });
+
+    Vue.component('RecommendedProduct', {
         props: ['photo'],
         template: `
             <div class="col-md-3">
@@ -142,7 +173,7 @@
         `
     });
 
-    Vue.component('appFooter', {
+    Vue.component('AppFooter', {
         template: `
             <footer class="footer">
                 <div class="container">
@@ -200,7 +231,7 @@
             };
         },
         methods: {
-            onSubmit(item) {
+            addToCart(item) {
                 this.cart.push({
                     name: item.name,
                     description: item.description,
