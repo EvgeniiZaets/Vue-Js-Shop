@@ -27,7 +27,7 @@
 
     <main class="main">
         <div v-if="items && items.length" class="container">
-            <Item-card :items="items" @addtocart="addToCart(items[0])"></Item-card>
+            <Item-card :item="items[0]" @addtocart="addToCart(items[0])"></Item-card>
             <span class="recommended">Recommended Products</span>
             <div class="row catalog-products mt-4">
                 <Recommended-product v-for="item in items.slice(1)" :photo="item.photo" :key="item.id"></Recommended-product>
@@ -44,7 +44,12 @@
 <script>
 
     Vue.component('AppHeader', {
-        props: ['cart'],
+        props: {
+            cart: {
+                type: Array,
+                required: true
+            },
+        },
         template: `
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -108,7 +113,6 @@
     });
 
     Vue.component('AppBreadcrumbs', {
-        props: ['cart'],
         template: `
             <div class="container">
                 <div class="breadcrumbs">
@@ -119,13 +123,18 @@
     });
 
     Vue.component('ItemCard', {
-        props: ['items'],
+        props: {
+            item: {
+                type: Object,
+                required: true
+            }
+        },
         template: `
             <div>
-                <img :src="items[0].photo" class="float-left preview-lg">
-                <h1>{{ items[0].name }}</h1>
-                <h2 class="description"><b>{{ items[0].description }}</b></h2>
-                <span class="price"><b>US{{ items[0].price }}.00</b></span>
+                <img :src="item.photo" class="float-left preview-lg">
+                <h1>{{ item.name }}</h1>
+                <h2 class="description"><b>{{ item.description }}</b></h2>
+                <span class="price"><b>US{{ item.price }}.00</b></span>
                 <form @submit.prevent="onSubmit">
                     <div class="row pb-4 d-flex align-items-center">
                         <div class="col-md-3 pl-0">
@@ -165,7 +174,9 @@
     });
 
     Vue.component('RecommendedProduct', {
-        props: ['photo'],
+        props: {
+            photo: String,
+        },
         template: `
             <div class="col-md-3">
                     <a href="#"><img :src="photo"></a>
