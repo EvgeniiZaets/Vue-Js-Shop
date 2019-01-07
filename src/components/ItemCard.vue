@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img :src="item.photo" class="float-left preview-lg">
+        <img :src="require('../assets/' + item.photo)" class="float-left preview-lg">
         <h1>{{ item.name }}</h1>
         <h2 class="description"><b>{{ item.description }}</b></h2>
         <span class="price"><b>US{{ item.price }}.00</b></span>
@@ -51,3 +51,48 @@
         }
     }
 </script>
+
+<style scoped>
+    .preview-lg {
+        max-width: 755px;
+        margin-right: 20px;
+    }
+
+    h1 {
+        padding-bottom: 10px;
+    }
+
+    .description {
+        text-transform: uppercase;
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        padding-bottom: 15px;
+    }
+
+    .price {
+        text-transform: uppercase;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+        display: block;
+        padding-bottom: 1.5rem;
+    }
+
+    input[type="text"] {
+        width: 49px;
+        text-align: center;
+        padding: 4px 0;
+    }
+
+    input[type="submit"] {
+        width: 170px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    select {
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        background-color: white;
+        padding: 5px;
+    }
+</style>

@@ -32,7 +32,7 @@
         <header class="header">
             <div class="container">
                 <div class="jumbotron text-center">
-                    <img src="img/logo.png">
+                    <img src="../assets/img/logo.png">
                 </div>
             </div>
         </header>
@@ -69,3 +69,64 @@
         },
     }
 </script>
+
+<style scoped>
+    /** bootstrap class **/
+    .container-fluid {
+        padding: 0;
+    }
+
+    /** bootstrap class **/
+    .navbar {
+        margin-top: 5px;
+    }
+
+    .navbar input[type="submit"] {
+        width: 30px;
+    }
+
+    .navbar .search::before
+    {
+        font-family: 'FontAwesome';
+        content: "\f002";
+        font-size: 14px;
+        position: absolute;
+        display: block;
+        padding-top: 3px;
+        margin-left: 5px;
+        color: #000000;
+    }
+
+    .navbar .checkout {
+        background-color: #e98997;
+        padding: 5px;
+        text-transform: uppercase;
+    }
+
+    .navbar .checkout:hover {
+        transition: all 0.3s ease;
+        background-color: white;
+    }
+
+    .navbar .sign-in {
+        margin-left: 15px;
+    }
+
+    /* Header */
+
+    .header .jumbotron {
+        background-color: white;
+        margin-bottom: 1rem;
+    }
+
+    /* Menu */
+
+    .nav.menu {
+        text-transform: uppercase;
+        font-size: 16px;
+        color: black;
+        letter-spacing: 1px;
+        border-bottom: 10px solid #000000;
+        padding-bottom: 25px;
+    }
+</style>

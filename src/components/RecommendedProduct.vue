@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-3">
-        <a href="#"><img :src="photo"></a>
+        <a href="#"><img :src="require('../assets/' + photo)"></a>
     </div>
 </template>
 
@@ -11,3 +11,10 @@
         },
     }
 </script>
+
+<style scoped>
+    img {
+        width: 200px;
+        height: 200px;
+    }
+</style>
