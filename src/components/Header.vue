@@ -32,7 +32,10 @@
         <header class="header">
             <div class="container">
                 <div class="jumbotron text-center">
-                    <img src="../assets/img/logo.png">
+                    <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
+                    <transition name="fade">
+                        <h2 v-if="showCredits" style="padding-top: 20px">Made by Jeque</h2>
+                    </transition>
                 </div>
             </div>
         </header>
@@ -67,10 +70,33 @@
                 required: true
             },
         },
+        data() {
+            return {
+                showCredits: false
+            };
+        }
     }
 </script>
 
 <style scoped>
+    /** Transition for credits */
+    .fade-enter {
+        opacity: 0;
+    }
+
+    .fade-enter-active {
+        transition: opacity 0.5s;
+    }
+
+    .fade-leave-active {
+        transition: opacity 0.5s;
+    }
+
+    .fade-leave-to {
+        opacity: 0;
+    }
+    /** End transition credits */
+
     /** bootstrap class **/
     .container-fluid {
         padding: 0;
