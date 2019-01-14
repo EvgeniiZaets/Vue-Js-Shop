@@ -33,8 +33,11 @@
             <div class="container">
                 <div class="jumbotron text-center">
                     <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
-                    <transition name="fade">
-                        <h2 v-if="showCredits" style="padding-top: 20px">Made by Jeque</h2>
+                    <transition name="fade" appear>
+                        <h2 v-if="showCredits" style="padding-top: 20px">Made by</h2>
+                    </transition>
+                    <transition name="slide" appear>
+                        <h2 v-if="showCredits">Jeque</h2>
                     </transition>
                 </div>
             </div>
@@ -72,7 +75,7 @@
         },
         data() {
             return {
-                showCredits: false
+                showCredits: true
             };
         }
     }
@@ -89,12 +92,35 @@
     }
 
     .fade-leave-active {
-        transition: opacity 0.5s;
+        transition: opacity 0.5s 1s;
     }
 
     .fade-leave-to {
         opacity: 0;
     }
+    /* */
+    .slide-enter {}
+
+    .slide-enter-active {
+        animation: slideIn 1s cubic-bezier(0,.91,.12,.84);
+    }
+
+    .slide-leave {}
+
+    .slide-leave-active {
+        animation: slideOut 1s cubic-bezier(.56,.14,.88,.09);
+    }
+
+    @keyframes slideIn {
+        0% { transform: translateX(-2000px); }
+        100% { transform: translateX(0px); }
+    }
+
+    @keyframes slideOut {
+        0% { transform: translateX(0px); }
+        100% { transform: translateX(-2000px); }
+    }
+
     /** End transition credits */
 
     /** bootstrap class **/
