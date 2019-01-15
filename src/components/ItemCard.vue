@@ -30,10 +30,8 @@
                     <input type="text" name="quantity" value="1">
                 </div>
             </div>
-            <div class="row">
-                <div class="">
-                    <input type="submit" value="Add To Cart">
-                </div>
+            <div class="animated tada">
+                <input type="submit" value="Add To Cart">
             </div>
         </form>
         <div class="clearfix"></div>

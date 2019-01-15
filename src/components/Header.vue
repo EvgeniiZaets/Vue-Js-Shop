@@ -33,7 +33,7 @@
             <div class="container">
                 <div class="jumbotron text-center">
                     <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
-                    <transition name="fade" appear>
+                    <transition name="fade" enter-active-class="animated tada" appear>
                         <h2 v-if="showCredits" style="padding-top: 20px">Made by</h2>
                     </transition>
                     <transition name="slide" appear>
@@ -88,7 +88,7 @@
     }
 
     .fade-enter-active {
-        transition: opacity 0.5s;
+        /*transition: opacity 0.5s;*/
     }
 
     .fade-leave-active {
