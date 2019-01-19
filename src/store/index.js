@@ -7,6 +7,11 @@ export const store = new Vuex.Store({
     state: {
         cart: []
     },
+    getters: {
+        cart(state) {
+            return state.cart;
+        }
+    },
     mutations: {
         addToCart(state, item) {
             state.cart.push({
