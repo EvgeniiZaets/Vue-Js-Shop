@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <App-header :cart="cart"></App-header>
+        <App-header></App-header>
         <App-breadcrumbs></App-breadcrumbs>
         <main class="main">
             <div v-if="items && items.length" class="container">
-                <App-item-card :item="items[0]" @addtocart="addToCart(items[0])"></App-item-card>
+                <App-item-card :item="items[0]"></App-item-card>
                 <span class="recommended">Recommended Products</span>
                 <div class="row mt-4">
                     <App-recommended-product v-for="item in items.slice(1)" :photo="item.photo" :key="item.id"></App-recommended-product>
@@ -32,18 +32,8 @@
         },
         data() {
             return {
-                items: [],
-                cart: []
+                items: []
             };
-        },
-        methods: {
-            addToCart(item) {
-                this.cart.push({
-                    name: item.name,
-                    description: item.description,
-                    photo: item.photo
-                });
-            }
         },
         mounted() {
             axios

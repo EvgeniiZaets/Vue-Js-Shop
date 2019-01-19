@@ -67,16 +67,15 @@
 
 <script>
     export default {
-        props: {
-            cart: {
-                type: Array,
-                required: true
-            },
-        },
         data() {
             return {
                 showCredits: true
             };
+        },
+        computed: {
+            cart() {
+                return this.$store.state.cart;
+            }
         }
     }
 </script>
