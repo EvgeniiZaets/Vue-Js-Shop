@@ -23,7 +23,7 @@
                         <a href="#" class="">My Cart({{ cart.length }})</a>
                     </div>
                     <div class="col-md-1">
-                        <a href="#" class="checkout">Checkout</a>
+                        <router-link :to="{name: 'cart'}" class="checkout">Checkout</router-link>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,9 @@
         <header class="header">
             <div class="container">
                 <div class="jumbotron text-center">
-                    <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
+                    <router-link :to="{name: 'items'}">
+                        <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
+                    </router-link>
                     <transition name="fade" enter-active-class="animated tada" appear>
                         <h2 v-if="showCredits" style="padding-top: 20px">Made by</h2>
                     </transition>
