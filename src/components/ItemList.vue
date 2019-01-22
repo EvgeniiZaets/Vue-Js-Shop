@@ -1,7 +1,6 @@
 <template>
     <div v-if="items && items.length" class="container">
-        <App-item-info :item="items[0]"></App-item-info>
-        <span class="recommended">Recommended Products</span>
+        <div class="all-products">All products</div>
         <div class="row mt-4">
             <App-item-preview v-for="item in items.slice(1)" :photo="item.photo" :key="item.id"></App-item-preview>
         </div>
@@ -9,12 +8,10 @@
 </template>
 
 <script>
-    import AppItemInfo from './ItemInfo';
     import AppItemPreview from './ItemPreview';
 
     export default {
         components: {
-            AppItemInfo,
             AppItemPreview,
         },
         data() {
@@ -23,7 +20,7 @@
             };
         },
         mounted() {
-            this.$store.commit('setBreadcrumbs', 'ODF80057');
+            this.$store.commit('setBreadcrumbs', 'All items');
             axios
                 .get('https://api.myjson.com/bins/10hkrw')
                 .then(response => (this.items = response.data.items));
@@ -32,10 +29,10 @@
 </script>
 
 <style scoped>
-    .recommended {
+    .all-products {
         font-size: 30px;
         font-family: 'gillsansbold', Helvetica, Arial, sans-serif;
-        padding: 10px;
+        padding: 2rem 0 0 0;
         line-height: 30px;
     }
 </style>

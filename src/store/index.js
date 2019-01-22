@@ -5,14 +5,21 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
+        breadcrumbs: '',
         cart: []
     },
     getters: {
+        breadcrumbs(state) {
+            return state.breadcrumbs;
+        },
         cart(state) {
             return state.cart;
         }
     },
     mutations: {
+        setBreadcrumbs(state, value) {
+            state.breadcrumbs = '> ' + value;
+        },
         addToCart(state, item) {
             state.cart.push({
                 name: item.name,
