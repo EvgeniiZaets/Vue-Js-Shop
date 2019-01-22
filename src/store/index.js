@@ -21,5 +21,15 @@ export const store = new Vuex.Store({
             });
         }
     },
+    // actions работают в асинхронном режиме.
+    actions: {
+        addToCart(store, item) {
+            store.commit('addToCart', item);
+            // эмулируем асинхронность с помощью задержки.
+            // setTimeout(() => {
+            //     store.commit('otherMutationName');
+            // }, 1000);
+        }
+    },
     strict: process.env.NODE_ENV !== 'production'
 });

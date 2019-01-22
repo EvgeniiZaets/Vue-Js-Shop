@@ -74,9 +74,11 @@
                 showCredits: true
             };
         },
-        computed: mapGetters([
-            'cart'
-        ])
+        computed: {
+            ...mapGetters([
+                'cart'
+            ]),
+        },
     }
 </script>
 
