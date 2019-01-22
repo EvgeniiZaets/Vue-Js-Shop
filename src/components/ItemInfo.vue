@@ -55,7 +55,7 @@
         },
         methods: {
             onSubmit() {
-                this.$store.dispatch('addToCart', this.item)
+                this.$store.dispatch('cart/addToCart', this.item)
             },
             enlarge() {
                 this.styleObject.maxWidth = '900px';

@@ -20,7 +20,7 @@
             };
         },
         mounted() {
-            this.$store.commit('setBreadcrumbs', 'All items');
+            this.$store.commit('navigation/setBreadcrumbs', 'All items');
             axios
                 .get('https://api.myjson.com/bins/10hkrw')
                 .then(response => (this.items = response.data.items));

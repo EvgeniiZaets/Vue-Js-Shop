@@ -47,21 +47,15 @@
 
         <div class="container-fluid">
             <ul class="nav justify-content-center menu">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Featured items</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Apparel</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Accessories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Special collections</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">All products</a>
-                </li>
+                <router-link v-for="(item, index) in menu"
+                             :key="index"
+                             :to="item.url"
+                             tag="li"
+                             class="nav-link"
+                             active-class="active"
+                >
+                    <a>{{ item.text }}</a>
+                </router-link>
             </ul>
         </div>
     </div>
@@ -77,9 +71,10 @@
             };
         },
         computed: {
-            ...mapGetters([
-                'cart'
-            ]),
+            ...mapGetters({
+                cart: 'cart/cart',
+                menu: 'navigation/menuItems'
+            }),
         },
     }
 </script>

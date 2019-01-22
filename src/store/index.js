@@ -3,40 +3,13 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+import cart from './modules/cart';
+import navigation from './modules/navigation';
+
 export const store = new Vuex.Store({
-    state: {
-        breadcrumbs: '',
-        cart: []
-    },
-    getters: {
-        breadcrumbs(state) {
-            return state.breadcrumbs;
-        },
-        cart(state) {
-            return state.cart;
-        }
-    },
-    mutations: {
-        setBreadcrumbs(state, value) {
-            state.breadcrumbs = '> ' + value;
-        },
-        addToCart(state, item) {
-            state.cart.push({
-                name: item.name,
-                description: item.description,
-                photo: item.photo
-            });
-        }
-    },
-    // actions работают в асинхронном режиме.
-    actions: {
-        addToCart(store, item) {
-            store.commit('addToCart', item);
-            // эмулируем асинхронность с помощью задержки.
-            // setTimeout(() => {
-            //     store.commit('otherMutationName');
-            // }, 1000);
-        }
+    modules: {
+        navigation,
+        cart
     },
     strict: process.env.NODE_ENV !== 'production'
 });

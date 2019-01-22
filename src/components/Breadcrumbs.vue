@@ -11,9 +11,9 @@
 
     export default {
         computed: {
-            ...mapGetters([
-                'breadcrumbs'
-            ]),
+            ...mapGetters('navigation', {
+                breadcrumbs: 'breadcrumbs'
+            }),
         },
     }
 </script>
