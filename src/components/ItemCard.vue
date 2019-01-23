@@ -1,9 +1,9 @@
 <template>
     <div v-if="items && items.length" class="container">
-        <App-item-info :item="items[0]"></App-item-info>
+        <App-item-info :item="currentItem"></App-item-info>
         <span class="recommended">Recommended Products</span>
         <div class="row mt-4">
-            <App-item-preview v-for="item in items.slice(1)" :photo="item.photo" :key="item.id"></App-item-preview>
+            <App-item-preview v-for="item in items" :photo="item.photo" :key="item.id"></App-item-preview>
         </div>
     </div>
 </template>
@@ -11,6 +11,7 @@
 <script>
     import AppItemInfo from './ItemInfo';
     import AppItemPreview from './ItemPreview';
+    import {http} from "../http";
 
     export default {
         components: {
@@ -19,14 +20,25 @@
         },
         data() {
             return {
-                items: []
+                items: [],
+                currentItem: {}
             };
         },
         mounted() {
             this.$store.commit('navigation/setBreadcrumbs', 'ODF80057');
-            axios
+            http
                 .get('https://api.myjson.com/bins/ma49w')
-                .then(response => (this.items = response.data.items));
+                .then(response => {
+                    // получение списка всех товаров.
+                    let items = response.data.items;
+                    // текущий товар.
+                    this.currentItem = items.find(item => item.id === +this.$route.params.id);
+                    // исключаем из списка товаров текущий(формируем списко рекомендованных).
+                    let currentItemId = this.currentItem.id;
+                    this.items = items.filter(function(item) {
+                        return item.id !== currentItemId;
+                    });
+                });
         },
     }
 </script>

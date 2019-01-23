@@ -1,25 +1,16 @@
 export default {
     namespaced: true,
     state: {
-        items: []
+        list: []
     },
     getters: {
-        cart(state) {
-            return state.items;
+        list(state) {
+            return state.list;
         }
     },
     mutations: {
-        add(state, item) {
-            if (state.items.indexOf(item) === -1) // если в корзине нет такого элемента.
-                state.items.push(item);
-        },
-        remove(state, item) {
-            let pos = state.items.indexOf(item);
-            if (pos !== -1)
-                state.items.splice(pos, 1);
-        }
+
     },
-    // actions работают в асинхронном режиме.
     actions: {
         add(store, item) {
             store.commit('add', item);

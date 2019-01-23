@@ -20,7 +20,7 @@ const routes = [
     },
     {
         name: 'item',
-        path: '/item',
+        path: '/item/:id',
         component: ItemCard
     },
     {
