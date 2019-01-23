@@ -25,7 +25,7 @@
         mounted() {
             this.$store.commit('navigation/setBreadcrumbs', 'ODF80057');
             axios
-                .get('https://api.myjson.com/bins/10hkrw')
+                .get('https://api.myjson.com/bins/ma49w')
                 .then(response => (this.items = response.data.items));
         },
     }

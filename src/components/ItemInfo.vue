@@ -8,7 +8,7 @@
         <h1>{{ item.name }}</h1>
         <h2 class="description"><b>{{ item.description }}</b></h2>
         <span class="price"><b>US{{ item.price }}.00</b></span>
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent="addToCart(item)">
             <div class="row pb-4 d-flex align-items-center">
                 <div class="col-md-3 pl-0">
                     Size:
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
+
     export default {
         props: {
             item: {
@@ -54,9 +56,9 @@
             };
         },
         methods: {
-            onSubmit() {
-                this.$store.dispatch('cart/addToCart', this.item)
-            },
+            ...mapActions('cart', {
+                addToCart: 'add'
+            }),
             enlarge() {
                 this.styleObject.maxWidth = '900px';
                 this.styleObject.transition = 'max-width 0.5s'

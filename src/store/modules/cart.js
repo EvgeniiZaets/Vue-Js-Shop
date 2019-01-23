@@ -1,26 +1,23 @@
 export default {
     namespaced: true,
     state: {
-        cart: []
+        items: []
     },
     getters: {
         cart(state) {
-            return state.cart;
+            return state.items;
         }
     },
     mutations: {
-        addToCart(state, item) {
-            state.cart.push({
-                name: item.name,
-                description: item.description,
-                photo: item.photo
-            });
+        add(state, item) {
+            if (state.items.indexOf(item) === -1) // если в корзине нет такого элемента.
+                state.items.push(item);
         }
     },
     // actions работают в асинхронном режиме.
     actions: {
-        addToCart(store, item) {
-            store.commit('addToCart', item);
+        add(store, item) {
+            store.commit('add', item);
             // эмулируем асинхронность с помощью задержки.
             // setTimeout(() => {
             //     store.commit('otherMutationName');
