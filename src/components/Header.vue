@@ -35,12 +35,12 @@
                     <router-link :to="{name: 'items'}">
                         <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
                     </router-link>
-                    <transition name="fade" enter-active-class="animated tada" appear>
-                        <h2 v-if="showCredits" style="padding-top: 20px">Made by</h2>
-                    </transition>
-                    <transition name="slide" appear>
-                        <h2 v-if="showCredits">Jeque</h2>
-                    </transition>
+                    <!--<transition name="fade" enter-active-class="animated tada" appear>-->
+                        <!--<h2 v-if="showCredits" style="padding-top: 20px">Made by</h2>-->
+                    <!--</transition>-->
+                    <!--<transition name="slide" appear>-->
+                        <!--<h2 v-if="showCredits">Jeque</h2>-->
+                    <!--</transition>-->
                 </div>
             </div>
         </header>
@@ -81,43 +81,43 @@
 
 <style scoped>
     /** Transition for credits */
-    .fade-enter {
-        opacity: 0;
-    }
+    /*.fade-enter {*/
+        /*opacity: 0;*/
+    /*}*/
 
-    .fade-enter-active {
-        /*transition: opacity 0.5s;*/
-    }
+    /*.fade-enter-active {*/
+        /*!*transition: opacity 0.5s;*!*/
+    /*}*/
 
-    .fade-leave-active {
-        transition: opacity 0.5s 1s;
-    }
+    /*.fade-leave-active {*/
+        /*transition: opacity 0.5s 1s;*/
+    /*}*/
 
-    .fade-leave-to {
-        opacity: 0;
-    }
-    /* */
-    .slide-enter {}
+    /*.fade-leave-to {*/
+        /*opacity: 0;*/
+    /*}*/
+    /*!* *!*/
+    /*.slide-enter {}*/
 
-    .slide-enter-active {
-        animation: slideIn 1s cubic-bezier(0,.91,.12,.84);
-    }
+    /*.slide-enter-active {*/
+        /*animation: slideIn 1s cubic-bezier(0,.91,.12,.84);*/
+    /*}*/
 
-    .slide-leave {}
+    /*.slide-leave {}*/
 
-    .slide-leave-active {
-        animation: slideOut 1s cubic-bezier(.56,.14,.88,.09);
-    }
+    /*.slide-leave-active {*/
+        /*animation: slideOut 1s cubic-bezier(.56,.14,.88,.09);*/
+    /*}*/
 
-    @keyframes slideIn {
-        0% { transform: translateX(-2000px); }
-        100% { transform: translateX(0px); }
-    }
+    /*@keyframes slideIn {*/
+        /*0% { transform: translateX(-2000px); }*/
+        /*100% { transform: translateX(0px); }*/
+    /*}*/
 
-    @keyframes slideOut {
-        0% { transform: translateX(0px); }
-        100% { transform: translateX(-2000px); }
-    }
+    /*@keyframes slideOut {*/
+        /*0% { transform: translateX(0px); }*/
+        /*100% { transform: translateX(-2000px); }*/
+    /*}*/
 
     /** End transition credits */
 

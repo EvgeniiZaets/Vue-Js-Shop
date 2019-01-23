@@ -2,9 +2,9 @@
     <div>
         <img class="float-left preview-lg"
              :src="require('../assets/' + item.photo)"
-             :style="styleObject"
-             @mouseover="enlarge"
-             @mouseout="reduce">
+             :style="styleObject">
+             <!--@mouseover="enlarge"-->
+             <!--@mouseout="reduce"-->
         <h1>{{ item.name }}</h1>
         <h2 class="description"><b>{{ item.description }}</b></h2>
         <span class="price"><b>US{{ item.price }}.00</b></span>
@@ -51,7 +51,7 @@
         data() {
             return {
                 styleObject: {
-                    maxWidth: '755px'
+                    maxWidth: '500px'
                 }
             };
         },
@@ -59,14 +59,14 @@
             ...mapActions('cart', {
                 addToCart: 'add'
             }),
-            enlarge() {
-                this.styleObject.maxWidth = '900px';
-                this.styleObject.transition = 'max-width 0.5s'
-            },
-            reduce() {
-                this.styleObject.maxWidth = '755px';
-                this.styleObject.transition = 'max-width 0.5s'
-            }
+            // enlarge() {
+            //     this.styleObject.maxWidth = '900px';
+            //     this.styleObject.transition = 'max-width 0.5s'
+            // },
+            // reduce() {
+            //     this.styleObject.maxWidth = '755px';
+            //     this.styleObject.transition = 'max-width 0.5s'
+            // }
         }
     }
 </script>

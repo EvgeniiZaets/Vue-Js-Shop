@@ -3,7 +3,9 @@
         <App-header></App-header>
         <App-breadcrumbs></App-breadcrumbs>
         <main class="main">
-            <router-view></router-view>
+            <transition name="fade" mode="out-in">
+                <router-view :key="this.$route.params.id"></router-view>
+            </transition>
         </main>
         <App-footer></App-footer>
     </div>
@@ -24,6 +26,29 @@
 </script>
 
 <style>
+    .main {
+        height: 750px;
+    }
+
+    .fade-enter {
+        opacity: 0;
+    }
+    .fade-enter-active {
+        transition: opacity .3s;
+    }
+    .fade-enter-to {
+
+    }
+    .fade-leave {
+
+    }
+    .fade-leave-active {
+        transition: opacity .3s;
+    }
+    .fade-leave-to {
+        opacity: 0
+    }
+
     @font-face {
         font-family: 'gillsans';
         src: url('./assets/fonts/GillSans.TTF');

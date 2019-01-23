@@ -3,7 +3,7 @@
         <App-item-info :item="currentItem"></App-item-info>
         <span class="recommended">Recommended Products</span>
         <div class="row mt-4">
-            <App-item-preview v-for="item in items" :photo="item.photo" :key="item.id"></App-item-preview>
+            <App-item-preview v-for="item in items" :itemId="item.id" :photo="item.photo" :key="item.id"></App-item-preview>
         </div>
     </div>
 </template>

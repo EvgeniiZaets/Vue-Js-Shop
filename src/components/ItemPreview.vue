@@ -1,14 +1,22 @@
 <template>
     <div class="col-md-3">
-        <a href="#"><img :src="require('../assets/' + photo)"></a>
+        <router-link :to="'/item/' + itemId">
+            <img :src="require('../assets/' + photo)">
+        </router-link>
     </div>
 </template>
 
 <script>
     export default {
         props: {
+            itemId: Number,
             photo: String,
         },
+        // methods: {
+        //     selectItem() {
+        //         this.$route.push('/item/' + this.itemId);
+        //     }
+        // }
     }
 </script>
 

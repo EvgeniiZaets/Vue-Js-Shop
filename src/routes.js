@@ -19,7 +19,6 @@ const routes = [
         component: ItemList,
     },
     {
-        name: 'item',
         path: '/item/:id',
         component: ItemCard
     },
@@ -36,5 +35,8 @@ const routes = [
 
 export const router = new VueRouter({
     routes,
-    mode: 'history'
+    mode: 'history',
+    // scrollBehavior () {
+    //     return {  }
+    // }
 });
