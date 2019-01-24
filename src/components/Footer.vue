@@ -49,39 +49,37 @@
     export default {}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .footer {
         margin-top: 60px;
         padding-top: 110px;
         background-color: black;
-    }
-
-    .footer h4 {
-        font-size: 22px;
-        font-family: 'gillsansbold', Helvetica, Arial, sans-serif;
-        color: #e98997;
-    }
-
-    .footer .mailing-text {
-        color: white;
-    }
-
-    .footer .nav li a {
-        color: white;
-    }
-
-    .footer .nav li a:hover {
-        transition: all 0.3s ease;
-        color: #e98997;
-    }
-
-    .footer .copyright {
-        margin-top: 80px;
-        width: 450px;
-        color: white;
-    }
-
-    .footer .copyright a {
-        color: #e98997;
+        h4 {
+            font-size: 22px;
+            font-family: 'gillsansbold', Helvetica, Arial, sans-serif;
+            color: #e98997;
+        }
+        .mailing-text {
+            color: white;
+        }
+        .nav {
+            li {
+                a {
+                    color: white;
+                    &:hover {
+                        transition: all 0.3s ease;
+                        color: #e98997;
+                    }
+                }
+            }
+        }
+        .copyright {
+            margin-top: 80px;
+            width: 450px;
+            color: white;
+            a {
+                color: #e98997;
+            }
+        }
     }
 </style>

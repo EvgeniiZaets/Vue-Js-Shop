@@ -9,7 +9,7 @@
 
 <script>
     import AppItemPreview from './ItemPreview';
-    import {http} from "../http";
+    import {  http} from "../http";
 
     export default {
         components: {
@@ -24,12 +24,13 @@
             this.$store.commit('navigation/setBreadcrumbs', 'All items');
             http
                 .get('https://api.myjson.com/bins/ma49w')
-                .then(response => (this.items = response.data.items));
+                .then(response => (this.items = response.data.items))
+                .catch(error => console.log(error));
         },
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .all-products {
         font-size: 30px;
         font-family: 'gillsansbold', Helvetica, Arial, sans-serif;

@@ -17,7 +17,7 @@
                 </div>
                 <div v-else>
                     <form @submit.prevent="checkout">
-                        <div v-for="item in cart" class="row">
+                        <div v-for="item in cart" :key="item.id" class="row">
                             <div class="col-md-6">
                                 <img :src="require('../assets/' + item.photo)" class="photo">
                             </div>
@@ -55,7 +55,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .modal-mask {
         position: fixed;
         z-index: 9998;
@@ -83,9 +83,11 @@
         transition: all .3s ease;
     }
 
-    .modal-header h3 {
-        margin-top: 0;
-        color: #42b983;
+    .modal-header {
+        h3 {
+            margin-top: 0;
+            color: #42b983;
+        }
     }
 
     .ok {

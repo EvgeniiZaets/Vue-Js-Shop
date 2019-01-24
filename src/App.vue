@@ -25,7 +25,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     @font-face {
         font-family: 'gillsans';
         src: url('./assets/fonts/GillSans.TTF');
@@ -52,22 +52,22 @@
         font-family: 'gillsans', Helvetica, Arial, sans-serif;
     }
 
-    input[type="text"] {
-        font-family: 'Lato', sans-serif;
-        border: 1px solid #ccc;
-        border-radius: 2px;
-    }
-
-    input[type="submit"] {
-        color: white;
-        border: 0;
-        text-shadow: none;
-        padding: 2px;
-        background-color: #e98997;
-    }
-
-    input[type="submit"]:hover {
-        background-color: black;
+    input {
+        &[type="text"] {
+            font-family: 'Lato', sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+        &[type="submit"] {
+            color: white;
+            border: 0;
+            text-shadow: none;
+            padding: 2px;
+            background-color: #e98997;
+            &:hover {
+                background-color: black;
+            }
+        }
     }
 
     /* Links */
