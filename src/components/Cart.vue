@@ -3,31 +3,45 @@
         <div class="modal-wrapper">
             <div class="modal-container">
 
-                <button @click="$emit('closeCart')" type="button" class="close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
                 <div v-if="cart.length < 1">
                     <div class="m-4">Cart is empty</div>
                     <div class="modal-footer">
                         <slot name="footer">
-                            <input @click="$emit('closeCart')" type="submit" class="ok pull-right" value="Ok">
+                            <input @click="$emit('closeCart')" type="submit" class="button-keep-shopping pull-right" value="Keep Shopping">
                         </slot>
                     </div>
                 </div>
                 <div v-else>
                     <form @submit.prevent="checkout">
-                        <div v-for="item in cart" :key="item.id" class="row">
-                            <div class="col-md-6">
-                                <img :src="require('../assets/' + item.photo)" class="photo">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="name">{{ item.name }}</div>
-                            </div>
-                        </div>
+                        <table class="table m-auto">
+                            <thead>
+                                <tr>
+                                    <th scope="col" colspan="2">Items</th>
+                                    <th scope="col">QTY</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Sizes</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in cart" :key="item.id">
+                                    <td><img :src="require('../assets/' + item.photo)" class="photo"></td>
+                                    <td class="name">{{ item.name }}</td>
+                                    <td>1</td>
+                                    <td>
+                                        <button @click="deleteFromCart(item.id)" type="button" class="close" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </td>
+                                    <td>S</td>
+                                    <td class="price">US${{ item.price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div class="modal-footer">
                             <slot name="footer">
-                                <input type="submit" class="checkout pull-right" value="Checkout">
+                                <input @click="$emit('closeCart')" type="submit" class="button-keep-shopping pull-right" value="Keep Shopping">
+                                <input type="submit" class="button-checkout pull-right" value="Checkout">
                             </slot>
                         </div>
                     </form>
@@ -74,7 +88,7 @@
     }
 
     .modal-container {
-        width: 500px;
+        width: 800px;
         margin: 0px auto;
         padding: 10px 15px;
         background-color: #fff;
@@ -90,21 +104,39 @@
         }
     }
 
-    .ok {
-        width: 30px;
+    .button-keep-shopping {
+        font-size: 18px;
+        width: 125px;
+        background-color: grey;
     }
 
-    .checkout {
-        width: 80px;
+    .button-checkout {
+        font-size: 18px;
+        width: 85px;
     }
 
     .photo {
-        width: 200px;
+        width: 170px;
     }
 
     .name {
         font-family: 'gillsansbold', Helvetica, Arial, sans-serif;
         font-size: 20px;
         text-transform: uppercase;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .table {
+        thead {
+            tr {
+                th {
+                    text-transform: uppercase;
+                    font-size: 16px;
+                }
+            }
+        }
     }
 </style>
