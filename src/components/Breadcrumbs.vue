@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="breadcrumbs">
-            <a href="#">Odd Future</a> {{ this.breadcrumbs }}
+            <router-link :to="{name: 'items'}">Odd Future</router-link> {{ this.breadcrumbs }}
         </div>
     </div>
 </template>

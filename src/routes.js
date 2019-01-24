@@ -22,11 +22,11 @@ const routes = [
         path: '/item/:id',
         component: ItemCard
     },
-    {
-        name: 'cart',
-        path: '/cart',
-        component: Cart
-    },
+    // {
+    //     name: 'cart',
+    //     path: '/cart',
+    //     component: Cart
+    // },
     {
         path: '*',
         component: E404

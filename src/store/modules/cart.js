@@ -4,7 +4,7 @@ export default {
         items: []
     },
     getters: {
-        cart(state) {
+        items(state) {
             return state.items;
         }
     },

@@ -20,10 +20,13 @@
                         <span class="sign-in">Sign In</span>
                     </div>
                     <div class="col-md-1 offset-md-5">
-                        <a href="#" class="">My Cart({{ cart.length }})</a>
+                        <a href="" @click="toggleCart">My Cart({{ cart.length }})</a>
+                        <transition name="modal">
+                            <App-cart v-show="showCart" @closeCart="closeCart"></App-cart>
+                        </transition>
                     </div>
                     <div class="col-md-1">
-                        <router-link :to="{name: 'cart'}" class="checkout">Checkout</router-link>
+                        <a href="" @click="toggleCart" class="checkout">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -33,7 +36,7 @@
             <div class="container">
                 <div class="jumbotron text-center">
                     <router-link :to="{name: 'items'}">
-                        <img @click="showCredits = !showCredits" src="../assets/img/logo.png">
+                        <img src="../assets/img/logo.png">
                     </router-link>
                     <!--<transition name="fade" enter-active-class="animated tada" appear>-->
                         <!--<h2 v-if="showCredits" style="padding-top: 20px">Made by</h2>-->
@@ -63,16 +66,29 @@
 
 <script>
     import {mapGetters} from 'vuex';
+    import AppCart from './Cart';
 
     export default {
+        components: {
+            AppCart
+        },
         data() {
             return {
-                showCredits: true
+                showCart: false,
             };
+        },
+        methods: {
+            closeCart() {
+                this.showCart = false;
+            },
+            toggleCart(e) {
+                e.preventDefault();
+                this.showCart = !this.showCart;
+            }
         },
         computed: {
             ...mapGetters({
-                cart: 'cart/cart',
+                cart: 'cart/items',
                 menu: 'navigation/menuItems'
             }),
         },
@@ -80,6 +96,31 @@
 </script>
 
 <style scoped>
+
+
+    /*
+     * The following styles are auto-applied to elements with
+     * transition="modal" when their visibility is toggled
+     * by Vue.js.
+     *
+     * You can easily play with the modal transition by editing
+     * these styles.
+     */
+
+    .modal-enter {
+        opacity: 0;
+    }
+
+    .modal-leave-active {
+        opacity: 0;
+    }
+
+    .modal-enter .modal-container,
+    .modal-leave-active .modal-container {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
     /** Transition for credits */
     /*.fade-enter {*/
         /*opacity: 0;*/

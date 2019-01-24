@@ -26,29 +26,6 @@
 </script>
 
 <style>
-    .main {
-        height: 750px;
-    }
-
-    .fade-enter {
-        opacity: 0;
-    }
-    .fade-enter-active {
-        transition: opacity .3s;
-    }
-    .fade-enter-to {
-
-    }
-    .fade-leave {
-
-    }
-    .fade-leave-active {
-        transition: opacity .3s;
-    }
-    .fade-leave-to {
-        opacity: 0
-    }
-
     @font-face {
         font-family: 'gillsans';
         src: url('./assets/fonts/GillSans.TTF');
@@ -103,5 +80,30 @@
         .container {
             max-width: 1230px;
         }
+    }
+</style>
+
+<style scoped>
+    .main {
+        height: 750px;
+    }
+
+    .fade-enter {
+        opacity: 0;
+    }
+    .fade-enter-active {
+        transition: opacity .3s;
+    }
+    .fade-enter-to {
+
+    }
+    .fade-leave {
+
+    }
+    .fade-leave-active {
+        transition: opacity .3s;
+    }
+    .fade-leave-to {
+        opacity: 0
     }
 </style>
