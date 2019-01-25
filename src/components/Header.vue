@@ -20,7 +20,7 @@
                         <span class="sign-in">Sign In</span>
                     </div>
                     <div class="col-md-1 offset-md-5">
-                        <a href="" @click="toggleCart">My Cart({{ cart.length }})</a>
+                        <a href="" @click="toggleCart">My Cart({{ cartCount }})</a>
                         <transition name="modal">
                             <App-cart v-show="showCart" @closeCart="closeCart"></App-cart>
                         </transition>
@@ -87,9 +87,12 @@
             }
         },
         computed: {
-            ...mapGetters({
-                cart: 'cart/items',
-                menu: 'navigation/menuItems'
+            ...mapGetters('cart', {
+                cart: 'items',
+                cartCount: 'count'
+            }),
+            ...mapGetters('navigation', {
+                menu: 'menuItems'
             }),
         },
     }

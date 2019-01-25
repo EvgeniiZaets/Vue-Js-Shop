@@ -8,13 +8,13 @@
         <h1>{{ item.name }}</h1>
         <h2 class="description"><b>{{ item.description }}</b></h2>
         <span class="price"><b>US{{ item.price }}.00</b></span>
-        <form @submit.prevent="addToCart(item)">
+        <form @submit.prevent="addToCart(selectedItem)">
             <div class="row pb-4 d-flex align-items-center">
                 <div class="col-md-3 pl-0">
                     Size:
                 </div>
                 <div class="col-md-2">
-                    <select>
+                    <select v-model="selectedItem.size">
                         <option>S</option>
                         <option>M</option>
                         <option>L</option>
@@ -27,7 +27,7 @@
                     Quantity:
                 </div>
                 <div class="col-md-2">
-                    <input type="text" name="quantity" value="1">
+                    <input type="text" v-model.number="selectedItem.quantity" placeholder="">
                 </div>
             </div>
             <div class="animated tada">
@@ -52,6 +52,11 @@
             return {
                 styleObject: {
                     maxWidth: '500px'
+                },
+                selectedItem: {
+                    item: this.item,
+                    quantity: 1,
+                    size: 'S'
                 }
             };
         },
