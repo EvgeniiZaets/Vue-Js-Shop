@@ -89,11 +89,17 @@
         computed: {
             ...mapGetters('cart', {
                 cart: 'items',
-                cartCount: 'count'
             }),
             ...mapGetters('navigation', {
                 menu: 'menuItems'
             }),
+            cartCount() {
+                let count = 0;
+                this.cart.forEach((item) => {
+                    count += item.quantity;
+                });
+                return count;
+            }
         },
     }
 </script>

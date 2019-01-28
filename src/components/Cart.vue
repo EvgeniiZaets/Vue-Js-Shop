@@ -35,7 +35,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button @click="deleteFromCart(item.item.id)" type="button" class="close" aria-label="Close">
+                                        <button @click="deleteFromCart(i)" type="button" class="close" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </td>
@@ -61,9 +61,18 @@
 
 <script>
     import {mapGetters} from 'vuex';
+    import {mapMutations} from 'vuex';
+    import {mapActions} from 'vuex';
 
     export default {
         methods: {
+            ...mapMutations('cart', [
+                'quantityUp',
+                'quantityDown'
+            ]),
+            ...mapActions('cart', [
+                'remove'
+            ]),
             checkout() {
                 console.log('checkout');
             },
@@ -72,18 +81,27 @@
             },
             itemQuantityUp(event, i) {
                 event.preventDefault();
-                this.$store.commit('cart/quantityUp', i);
+                this.quantityUp(i);
             },
             itemQuantityDown(event, i) {
                 event.preventDefault();
-                this.$store.commit('cart/quantityDown', i);
-            }
+                this.quantityDown(i);
+            },
+            deleteFromCart(i) {
+                this.remove(i);
+            },
         },
         computed: {
             ...mapGetters('cart', {
                 cart: 'items',
-                subtotal: 'totalPrice'
             }),
+            subtotal() {
+                let subtotal = 0;
+                this.cart.forEach((item) => {
+                    subtotal += item.item.price * item.quantity;
+                });
+                return subtotal;
+            },
         },
     }
 </script>

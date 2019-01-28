@@ -2,52 +2,38 @@ export default {
     namespaced: true,
     state: {
         items: [],
-        count: 0,
-        totalPrice: 0
     },
     getters: {
         items(state) {
             return state.items;
         },
-        count(state) {
-            return state.count;
-        },
-        totalPrice(state) {
-            return state.totalPrice;
-        }
     },
     mutations: {
         add(state, item) {
             if (state.items.find(itemFromCart => itemFromCart.item.id === item.item.id) === undefined) { // если в корзине нет товара с таким же id.
                 let itemClone = JSON.parse(JSON.stringify(item)); // делаем клон, чтобы убрать реактивность quantity и size.
                 state.items.push(itemClone);
-                state.totalPrice += itemClone.item.price;
             } else { // если в корзине есть товар с таким же id.
                 let itemWithSameSize = state.items.find(itemFormCart => itemFormCart.size === item.size);
                 if (itemWithSameSize) { // и у него совпал размер - увеличиваем quantity.
                     itemWithSameSize.quantity += item.quantity;
-                    state.totalPrice += item.item.price;
                 } else { // иначе добавляем как отдельный товар.
                     let itemClone = JSON.parse(JSON.stringify(item));
                     state.items.push(itemClone)
-                    state.totalPrice += itemClone.item.price;
                 }
             }
-            state.count++;
-
         },
-        remove(state, item) {
-            let pos = state.items.indexOf(item);
-            if (pos !== -1)
-                state.items.splice(pos, 1);
+        remove(state, payload) {
+            state.items.splice(payload, 1);
         },
-        quantityUp(state, payload) {;
+        quantityUp(state, payload) {
             state.items[payload].quantity++;
         },
         quantityDown(state, payload) {
-            if (state.items[payload].quantity > 1)
+            if (state.items[payload].quantity > 1) {
                 state.items[payload].quantity--;
-        }
+            }
+        },
     },
     // actions работают в асинхронном режиме.
     actions: {
@@ -58,8 +44,8 @@ export default {
             //     store.commit('otherMutationName');
             // }, 1000);
         },
-        remove(store, item) {
-            store.commit('remove', item);
+        remove(store, payload) {
+            store.commit('remove', payload);
         }
     },
 }
