@@ -23,8 +23,8 @@
         mounted() {
             this.$store.commit('navigation/setBreadcrumbs', 'All items');
             http
-                .get('https://api.myjson.com/bins/ma49w')
-                .then(response => (this.items = response.data.items))
+                .get('http://api.shop.loc/products') // demo api https://api.myjson.com/bins/ma49w
+                .then(response => (this.items = response.data))
                 .catch(error => console.log(error));
         },
     }

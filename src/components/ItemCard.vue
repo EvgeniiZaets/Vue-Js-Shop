@@ -27,10 +27,10 @@
         mounted() {
             this.$store.commit('navigation/setBreadcrumbs', 'ODF80057');
             http
-                .get('https://api.myjson.com/bins/ma49w')
+                .get('http://api.shop.loc/products')
                 .then(response => {
                     // получение списка всех товаров.
-                    let items = response.data.items;
+                    let items = response.data;
                     // текущий товар.
                     this.currentItem = items.find(item => item.id === +this.$route.params.id);
                     // исключаем из списка товаров текущий(формируем списко рекомендованных).
